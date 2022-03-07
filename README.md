@@ -2,8 +2,8 @@
 
 # The Carpentries Workshop Template
 
-This repository is The Carpentries' ([Software Carpentry][swc-site], [Data Carpentry][dc-site], and
-[Library Carpentry][lc-site]'s) template for creating websites for workshops.
+This repository is uses the Carpentries' ([Software Carpentry][swc-site], [Data Carpentry][dc-site], and
+[Library Carpentry][lc-site]'s) template for creating for the python workshop starting April 19, 2022.
 
 1. **Please _do not fork this repository directly on GitHub._** Instead, please use GitHub's
    "template" function following [the instructions below](#creating-a-repository) to copy this
@@ -37,32 +37,32 @@ create a workshop website.
 
 ## Creating a Repository
 
-1.  Log in to GitHub.
+~~1.  Log in to GitHub.
     (If you do not have an account, you can quickly create one for free.)
-    You must be logged in for the remaining steps to work.
+    You must be logged in for the remaining steps to work.~~
 
-2.  On this page (<https://github.com/carpentries/workshop-template>),
-    click on the green "Use this template" button (top right)
+~~2.  On this page (<https://github.com/carpentries/workshop-template>),
+    click on the green "Use this template" button (top right)~~
 
     ![screenshot of this repository's GitHub page with an arrow pointing to the the 'use this template' button on the top left](fig/select-github-use-template.png?raw=true)
 
-3.  Select the owner for your new repository.
-    (This will probably be you, but may instead be an organization you belong to.)
+~~3.  Select the owner for your new repository.
+    (This will probably be you, but may instead be an organization you belong to.)~~
 
-4.  Choose a name for your workshop website repository.
+~~4.  Choose a name for your workshop website repository.
     This name should have the form `YYYY-MM-DD-site`,
     e.g., `2016-12-01-oomza`,
     where `YYYY-MM-DD` is the start date of the workshop.
     If your workshop is held online, then the respository name should have `-online` in the end.
-    e.g., `2016-12-01-oomza-online`
+    e.g., `2016-12-01-oomza-online`~~
 
-5.  Make sure the repository is public, leave "Include all branches" unchecked, and click
+~~5.  Make sure the repository is public, leave "Include all branches" unchecked, and click
 on "Create repository from template".
-You will be redirected to your new copy of the workshop template respository.
+You will be redirected to your new copy of the workshop template respository.~~
 
-6. Your new website will be rendered at `https://your_username.github.io/YYYY-MM-DD-site`.
+~~6. Your new website will be rendered at `https://your_username.github.io/YYYY-MM-DD-site`.
 For example, if your username is `gvwilson`, the website's URL will be
-`https://gvwilson.github.io/2016-12-01-oomza`.
+`https://gvwilson.github.io/2016-12-01-oomza`.~~
 
 If you experience a problem, please [get in touch](#getting-and-giving-help).
 
@@ -75,30 +75,30 @@ There are two ways of customizing your website. You can either:
 
 ### Updating the files on GitHub in your web browser
 
-1.  Go into your newly-created repository,
+~~1.  Go into your newly-created repository,
     which will be at `https://github.com/your_username/YYYY-MM-DD-site`.
     For example,
     if your username is `gvwilson`,
-    the repository's URL will be `https://github.com/gvwilson/2016-12-01-oomza`.
+    the repository's URL will be `https://github.com/gvwilson/2016-12-01-oomza`.~~
 
-3.  Ensure you are on the gh-pages branch by clicking on the branch under the drop
-    down in the menu bar (see the note below):
+~~3.  Ensure you are on the gh-pages branch by clicking on the branch under the drop
+    down in the menu bar (see the note below):~~
 
     ![screenshot of this repository's GitHub page showing the "Branch" dropdown menu expanded with the "gh-pages" branch selected](fig/select-gh-pages-branch.png?raw=true)
 
-3.  Edit the header of `index.md` to customize the list of instructors,
+~~3.  Edit the header of `index.md` to customize the list of instructors,
     workshop venue, etc.
     You can do this in the browser by clicking on it in the file view on GitHub
-    and then selecting the pencil icon in the menu bar:
+    and then selecting the pencil icon in the menu bar:~~
 
     ![screenshot of top menu bar for GitHub's file interface with the edit icon highlighted in the top right](fig/edit-index-file-menu-bar.png?raw=true)
 
     Editing hints are embedded in `index.md`,
     and full instructions are in [the customization instructions][customization].
 
-4.  Remove the notice about using the workshop template in the `index.md` file. You can safely
+~~4.  Remove the notice about using the workshop template in the `index.md` file. You can safely
     delete everything between the `{% comment %}` and `{% endcomment %}` (included) as indicated
-    below (about from line 35 to line 51):
+    below (about from line 35 to line 51):~~
 
     ```jekyll
     {% comment %} <------------ remove from this line
@@ -115,9 +115,9 @@ There are two ways of customizing your website. You can either:
     {% endcomment %} <--------- until this line
     ```
 
-4.  Edit `_config.yml` to customize certain site-wide variables, such as: `carpentry` (to tell your
+~~4.  Edit `_config.yml` to customize certain site-wide variables, such as: `carpentry` (to tell your
     participants the lesson program for your workshop), `curriculum` and `flavor` for the
-    curriculum  taught in your workshop, and `title` (overall title for all pages).
+    curriculum  taught in your workshop, and `title` (overall title for all pages).~~
 
     Editing hints are embedded in `_config.yml`,
     and full instructions are in [the customization instructions][customization].
@@ -171,9 +171,9 @@ No description, website, or topics provided. — Edit
 
 Click 'Edit' and add:
 
-1.  A very brief description of your workshop in the "Description" box (e.g., "Oomza University workshop, Dec. 2016")
+~~1.  A very brief description of your workshop in the "Description" box (e.g., "Oomza University workshop, Dec. 2016")~~
 
-2.  The URL for your workshop in the "Website" box (e.g., `https://gvwilson.github.io/2016-12-01-oomza`)
+~~2.  The URL for your workshop in the "Website" box (e.g., `https://gvwilson.github.io/2016-12-01-oomza`)~~
 
 This will help people find your website if they come to your repository's home page.
 
