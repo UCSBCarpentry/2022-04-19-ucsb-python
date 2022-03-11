@@ -363,6 +363,9 @@ of code below the Schedule `<h2>` header below with
 
 <h2 id="schedule">Schedule</h2>
 
+A precise schedule is yet to be established, please check back closer to the start of registration. The workshop will include regular breaks. Please [contact the workshop organisers](#contact) if you would like more information about the planned schedule.
+
+{% comment %}
 {% if site.carpentry == "swc" %}
 {% include swc/schedule.html %}
 {% elsif site.carpentry == "dc" %}
@@ -373,6 +376,7 @@ of code below the Schedule `<h2>` header below with
 This workshop is teaching a lesson in [The Carpentries Incubator](https://carpentries-incubator.org/).
 Please check [the lesson homepage]({{ site.incubator_lesson_site }}) for a list of lesson sections and estimated timings.
 {% endif %}
+{% endcomment %}
 
 {% comment %}
 Edit/replace the text above if you want to include a schedule table.
