@@ -430,6 +430,34 @@ please preview your site before committing, and make sure to run
   <a href = "{{site.swc_github}}/workshop-template/wiki/Configuration-Problems-and-Solutions">Configuration Problems and Solutions wiki page</a>.
 </p>
 
+
+<h2 id="setup">Data</h2>
+
+<p>
+  Data for this lesson is from the
+  <a href= "https://figshare.com/articles/Portal_Project_Teaching_Database/1314459">Portal Project Teaching
+    Database</a>.
+  Specifically, we use the following eight data files:
+ </p>
+ <ul style="list-style-type:circle">
+  <li> surveys.csv </li>
+    <li> surveys2001.csv </li>
+    <li> surveys2002.csv </li>
+    <li> species.csv </li>
+    <li> speciesSubset.csv </li>
+    <li> plots.csv </li>
+    <li> bouldercreek_09_2013.txt </li>
+    <li> portal_mammals.sqlite </li>
+  </ul>
+<p>
+  Please download them (by clicking on the corresponding links) and move them to the same directory, or
+  <a href= "https://datacarpentry.org/python-ecology-lesson/data/portal-teachingdb-master.zip">download all
+    the files as a zip</a>
+  which will give you everything in a single compressed file. You'll need to unzip
+  this file after downloading it.
+</p>
+
+
 {% comment %}
 For online workshops, the section below provides:
 - installation instructions for the Zoom client
