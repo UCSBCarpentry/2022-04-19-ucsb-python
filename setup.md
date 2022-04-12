@@ -11,8 +11,11 @@ title: Setup
 >
 > Please [download the SBC LTER data files as a zip.](https://ucsbcarpentry.github.io/2022-04-19-ucsb-python/data/lobster-teaching-db.zip)
 > This link will give you everything in a compressed file. **You will need to unzip
-> this file after downloading it.** We recommend keeping the folder of data on your desktop or someplace accessible.
-> Please do the same for the second set of [teaching data files](https://ucsbcarpentry.github.io/2022-04-19-ucsb-python/data/portal-teachingdb-master.zip).
+> this file after downloading it.** Please do the same for the second set of [teaching data files](https://ucsbcarpentry.github.io/2022-04-19-ucsb-python/data/portal-teachingdb-master.zip).
+>
+> We recommend making a folder on your desktop called "april-2022-python". Inside of this folder, please keep the data files in another folder called "data".
+> If you follow these steps, you will have a folder called "april-2022-python". Inside of april 2022 python, you will have a folder called "data". Inside of the data folder, is the data files you
+> downloaded from the link above.
 {: .prereq}
 
 
