@@ -434,7 +434,8 @@ please preview your site before committing, and make sure to run
 <h2 id="setup">Data</h2>
 
 <p>
-  Data for this lesson is from the
+<!-- 
+  Data for this lesson is from the 
   <a href= "https://figshare.com/articles/Portal_Project_Teaching_Database/1314459">Portal Project Teaching
     Database</a>.
   Specifically, we use the following eight data files:
@@ -456,7 +457,7 @@ please preview your site before committing, and make sure to run
   which will give you everything in a single compressed file. You'll need to unzip
   this file after downloading it.
 </p>
-
+--> 
 
 {% comment %}
 For online workshops, the section below provides:
