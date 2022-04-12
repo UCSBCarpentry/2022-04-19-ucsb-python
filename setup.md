@@ -9,16 +9,10 @@ title: Setup
 > California Bight.
 > You may also read more about the greater [Long Term Ecological Research Network](https://lternet.edu/about/).
 >
-> We use the following five data files:
-> - lobster_data.csv
-> - lobsters_2012.csv
-> - lobsters_2013.csv
-> - position_cols.csv
-> - time_cols.csv
->
-> Please [download all the files as a zip.](https://ucsbcarpentry.github.io/2022-04-19-ucsb-python/data/lobster-teaching-db.zip)
-> This link will give you everything in a single compressed file. **You will need to unzip
+> Please [download the SBC LTER data files as a zip.](https://ucsbcarpentry.github.io/2022-04-19-ucsb-python/data/lobster-teaching-db.zip)
+> This link will give you everything in a compressed file. **You will need to unzip
 > this file after downloading it.** We recommend keeping the folder of data on your desktop or someplace accessible.
+> Please do the same for the second set of [teaching data files](https://ucsbcarpentry.github.io/2022-04-19-ucsb-python/data/portal-teachingdb-master.zip).
 {: .prereq}
 
 
@@ -195,15 +189,15 @@ conda deactivate
 ~~~
 {: .language-bash}
 
-## Launch a Jupyter notebook
+## Launch a Jupyter Lab
 
 After installing either Anaconda or Miniconda and the workshop packages,
-launch a Jupyter notebook by typing this command from the terminal:
+launch JupyterLab. You can launch JupyterLab through Anaconda Navigator, or by typing this command from the terminal:
 
 ~~~
-jupyter notebook
+jupyter lab
 ~~~
 {: .language-bash}
 
-The notebook should open automatically in your browser. If it does not or you
-wish to use a different browser, open this link: <http://localhost:8888>.
+JupyterLab should open automatically in your browser. If it does not or you
+wish to use a different browser, open this link: <http://localhost:8888/lab>.
