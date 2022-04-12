@@ -415,11 +415,12 @@ please preview your site before committing, and make sure to run
   Library Carpentry
   {% endif %}
   workshop,
-  you will need access to software as described below.
+  you will need access to software as described on the <a href= "https://ucsbcarpentry.github.io/2022-04-19-ucsb-python/setup.html"><strong>workshop Setup page</strong></a>.
   In addition, you will need an up-to-date web browser.
 </p>
+<!--
 <ul style="list-style-type:circle">
-  <li> <a href="https://www.anaconda.com/products/individual">Anaconda</a></li> 
+  <li> <a href="https://www.anaconda.com/products/individual">Anaconda</a></li>
   <li> <b>Windows</b>: Make sure that <b>Register Anaconda as my default Python 3.x</b> option is selected. It should be the latest version of Anaconda</li>
   <li> <b>Mac</b>:Make sure install location is set to <b>install only for me</b> so Anaconda will install files locally</li>
   <li> Verify the installation by opening the terminal and typing in <span style="font-family: monospace;">jupyter lab</span> to launch a jupyter interface</li>
@@ -434,8 +435,7 @@ please preview your site before committing, and make sure to run
 <h2 id="setup">Data</h2>
 
 <p>
-<!-- 
-  Data for this lesson is from the 
+  Data for this lesson is from the
   <a href= "https://figshare.com/articles/Portal_Project_Teaching_Database/1314459">Portal Project Teaching
     Database</a>.
   Specifically, we use the following eight data files:
@@ -457,7 +457,7 @@ please preview your site before committing, and make sure to run
   which will give you everything in a single compressed file. You'll need to unzip
   this file after downloading it.
 </p>
---> 
+-->
 
 {% comment %}
 For online workshops, the section below provides:
