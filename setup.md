@@ -3,17 +3,18 @@ title: Setup
 ---
 
 > ## Data
-> Data for this lesson is provided by [Santa Barbara Coastal, Long Term Ecological Research] (https://sbclter.msi.ucsb.edu/about/) site.
+> Data for this lesson is provided by [Santa Barbara Coastal, Long Term Ecological Research](https://sbclter.msi.ucsb.edu/about/) site.
 > SBC LTER is based at the University of California, Santa Barbara (UCSB) Marine Science Institute.
 > There, they maintain and support research on long-term ecological phenomena; their principal study domain is the northern portion of the Southern
 > California Bight.
 > You may also read more about the greater [Long Term Ecological Research Network](https://lternet.edu/about/).
-> Specifically, we use the following five data files:
-> - [lobster_data.csv](https://ndownloader.figshare.com/files/10717177)
-> - [lobsters_2012.csv]({{ page.root }}/data/yearly_files/surveys2001.csv)
-> - [lobsters_2013.csv]({{ page.root }}/data/yearly_files/surveys2002.csv)
-> - [position_cols.csv](https://ndownloader.figshare.com/files/3299483)
-> - [time_cols.csv]({{ page.root }}/data/speciesSubset.csv)
+>
+> We use the following five data files:
+> - lobster_data.csv
+> - lobsters_2012.csv
+> - lobsters_2013.csv
+> - position_cols.csv
+> - time_cols.csv
 >
 > Please [download all the files as a zip.](https://ucsbcarpentry.github.io/2022-04-19-ucsb-python/data/lobster-teaching-db.zip)
 > This link will give you everything in a single compressed file. **You will need to unzip
