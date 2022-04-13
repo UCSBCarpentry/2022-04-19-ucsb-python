@@ -31,9 +31,6 @@ double quotation marks around the value, unless specified otherwise.
 And run 'make workshop-check' *before* committing to make sure that changes are good.
 {% endcomment %}
 
-<h2><strong>Registration for this workshop begins on Friday, March 25 8:00AM PST</strong></h2>
-<a href="https://www.timeanddate.com/worldclock/fixedtime.html?msg=Python&iso=20220325T08&p1=1050">Check what time registration opens in your time zones</a>
-
 
 {% comment %}
 8< ============= For a workshop delete from here =============
