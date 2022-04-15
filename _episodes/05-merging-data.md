@@ -89,12 +89,12 @@ one DataFrame to another.  Let's grab two subsets of our data to see how this
 works.
 
 ~~~
-# Read in first 10 lines of position table
-pos_sub = surveys_df.head(10)
+# Read in first 10 lines
+lobster_sub = lobster_df.head(10)
 # Grab the last 10 rows
-survey_sub_last10 = surveys_df.tail(10)
+lobster_sub_last10 = lobster_df.tail(10)
 # Reset the index values to the second dataframe appends properly
-survey_sub_last10 = survey_sub_last10.reset_index(drop=True)
+lobster_sub_last10 = lobster_sub_last10.reset_index(drop=True)
 # drop=True option avoids adding new index column with old index values
 ~~~
 {: .language-python}
@@ -110,16 +110,16 @@ related in some way).
 
 ~~~
 # Stack the DataFrames on top of each other
-vertical_stack = pd.concat([survey_sub, survey_sub_last10], axis=0)
+vertical_stack = pd.concat([lobster_sub, lobster_sub_last10], axis=0)
 
 # Place the DataFrames side by side
-horizontal_stack = pd.concat([survey_sub, survey_sub_last10], axis=1)
+horizontal_stack = pd.concat([lobster_sub, lobster_sub_last10], axis=1)
 ~~~
 {: .language-python}
 
 ### Row Index Values and Concat
 Have a look at the `vertical_stack` dataframe? Notice anything unusual?
-The row indexes for the two data frames `survey_sub` and `survey_sub_last10`
+The row indexes for the two data frames `lobster_sub` and `lobster_sub_last10`
 have been repeated. We can reindex the new dataframe using the `reset_index()` method.
 
 ## Writing Out Data to CSV
@@ -148,9 +148,9 @@ new_output = pd.read_csv('data/out.csv', keep_default_na=False, na_values=[""])
 
 > ## Challenge - Combine Data
 >
-> In the data folder, there are two survey data files: `surveys2001.csv` and
-> `surveys2002.csv`. Read the data into Python and combine the files to make one
-> new data frame. Create a plot of average plot weight by year grouped by sex.
+> In the data folder, there are two lobster data files: `lobsters_2012.csv` and
+> `lobsters_2013.csv`. Read the data into Python and combine the files to make one
+> new data frame. Create a plot of average plot size by year grouped by site.
 > Export your results as a CSV and make sure it reads back into Python properly.
 {: .challenge}
 
@@ -167,46 +167,26 @@ table" containing additional data that we want to include in the other.
 NOTE: This process of joining tables is similar to what we do with tables in an
 SQL database.
 
-For example, the `species.csv` file that we've been working with is a lookup
-table. This table contains the genus, species and taxa code for 55 species. The
-species code is unique for each line. These species are identified in our survey
-data as well using the unique species code. Rather than adding 3 more columns
-for the genus, species and taxa to each of the 35,549 line Survey data table, we
-can maintain the shorter table with the species information. When we want to
-access that information, we can create a query that joins the additional columns
-of information to the Survey data.
-
 Storing data in this way has many benefits including:
 
-1. It ensures consistency in the spelling of species attributes (genus, species
-   and taxa) given each species is only entered once. Imagine the possibilities
-   for spelling errors when entering the genus and species thousands of times!
-2. It also makes it easy for us to make changes to the species information once
-   without having to find each instance of it in the larger survey data.
+1. It ensures consistency in the spelling of different attributes (site) given each species is only     
+   entered once.
+2. It also makes it easy for us to make changes to a particular attribute information once,
+   without having to find each instance of it in the larger data.
 3. It optimizes the size of our data.
 
 
 ## Joining Two DataFrames
 
-To better understand joins, let's grab the first 10 lines of our data as a
-subset to work with. We'll use the `.head` method to do this. We'll also read
-in a subset of the species table.
-
+To better understand joins, let's import a subset of our data to work with.
 ~~~
-# Read in first 10 lines of surveys table
-survey_sub = surveys_df.head(10)
+position_cols = pd.read_csv('data/position_cols.csv', keep_default_na=False, na_values=[""])
+position_cols = position_cols[['record_id', 'site', 'transect', 'replicate']]
 
-# Import a small subset of the species data designed for this part of the lesson.
-# It is stored in the data folder.
-species_sub = pd.read_csv('data/speciesSubset.csv', keep_default_na=False, na_values=[""])
+time_cols = pd.read_csv('data/time_cols.csv', keep_default_na=False, na_values=[""])
+time_cols = time_cols[['record_id', 'year', 'month', 'date']]
 ~~~
 {: .language-python}
-
-In this example, `species_sub` is the lookup table containing genus, species, and
-taxa names that we want to join with the data in `survey_sub` to produce a new
-DataFrame that contains all of the columns from both `species_df` *and*
-`survey_df`.
-
 
 ## Identifying join keys
 
@@ -218,21 +198,20 @@ identify a (differently-named) column in each DataFrame that contains the same
 information.
 
 ~~~
->>> species_sub.columns
+>>> position_cols.columns
 
-Index([u'species_id', u'genus', u'species', u'taxa'], dtype='object')
+Index(['record_id', 'site', 'transect', 'replicate'], dtype='object')
 
->>> survey_sub.columns
+>>> time_cols.columns
 
-Index([u'record_id', u'month', u'day', u'year', u'plot_id', u'species_id',
-       u'sex', u'hindfoot_length', u'weight'], dtype='object')
+Index(['record_id', 'year', 'month', 'date'], dtype='object')
 ~~~
 {: .language-python}
 
 In our example, the join key is the column containing the two-letter species
-identifier, which is called `species_id`.
+identifier, which is called `record_id`.
 
-Now that we know the fields with the common species ID attributes in each
+Now that we know the fields with the common record ID attributes in each
 DataFrame, we are almost ready to join our data. However, since there are
 [different types of joins][join-types], we
 also need to decide which type of join makes sense for our analysis.
@@ -253,8 +232,8 @@ The pandas function for performing joins is called `merge` and an Inner join is
 the default option:
 
 ~~~
-merged_inner = pd.merge(left=survey_sub, right=species_sub, left_on='species_id', right_on='species_id')
-# In this case `species_id` is the only column name in  both dataframes, so if we skipped `left_on`
+merged_inner = pd.merge(left=position_cols, right=time_cols, left_on='record_id', right_on='record_id')
+# In this case `record_id` is the only column name in  both dataframes, so if we skipped `left_on`
 # And `right_on` arguments we would still get the same result
 
 # What's the size of the output data?
@@ -264,59 +243,55 @@ merged_inner
 {: .language-python}
 
 ~~~
-   record_id  month  day  year  plot_id species_id sex  hindfoot_length  \
-0          1      7   16  1977        2         NL   M               32
-1          2      7   16  1977        3         NL   M               33
-2          3      7   16  1977        2         DM   F               37
-3          4      7   16  1977        7         DM   M               36
-4          5      7   16  1977        3         DM   M               35
-5          8      7   16  1977        1         DM   M               37
-6          9      7   16  1977        1         DM   F               34
-7          7      7   16  1977        2         PE   F              NaN
-
-   weight       genus   species    taxa
-0     NaN     Neotoma  albigula  Rodent
-1     NaN     Neotoma  albigula  Rodent
-2     NaN   Dipodomys  merriami  Rodent
-3     NaN   Dipodomys  merriami  Rodent
-4     NaN   Dipodomys  merriami  Rodent
-5     NaN   Dipodomys  merriami  Rodent
-6     NaN   Dipodomys  merriami  Rodent
-7     NaN  Peromyscus  eremicus  Rodent
+record_id  site  transect replicate  year  month        date
+0           1  IVEE         1         A  2012      8  2012-08-20
+1           2  IVEE         5         B  2012      8  2012-08-20
+2           3  IVEE         5         B  2012      8  2012-08-20
+3           4  IVEE         5         B  2012      8  2012-08-20
+4           5  IVEE         5         C  2012      8  2012-08-20
+5           6  IVEE         5         D  2012      8  2012-08-20
+6           7  IVEE         6         A  2012      8  2012-08-20
+7           8  IVEE         6         B  2012      8  2012-08-20
+8           9  IVEE         6         B  2012      8  2012-08-20
+9          10  IVEE         6         C  2012      8  2012-08-20
+10         11  IVEE         6         D  2012      8  2012-08-20
+...
+40         41  IVEE         4         D  2012      8  2012-08-20
+41         42  IVEE         4         B  2012      8  2012-08-20
+42         43  IVEE         4         C  2012      8  2012-08-20
+43         44  IVEE         3         D  2012      8  2012-08-20
+44         45  IVEE         3         C  2012      8  2012-08-20
+45         46  IVEE         3         C  2012      8  2012-08-20
+46         47  IVEE         3         C  2012      8  2012-08-20
+47         48  IVEE         4         A  2012      8  2012-08-20
+48         49  NAPL         6         D  2012      8  2012-08-22
+49         50  NAPL         8         A  2012      8  2012-08-22
+50         51  NAPL         7         A  2012      8  2012-08-22
 ~~~
 {: .output}
 
-The result of an inner join of `survey_sub` and `species_sub` is a new DataFrame
-that contains the combined set of columns from `survey_sub` and `species_sub`. It
-*only* contains rows that have two-letter species codes that are the same in
-both the `survey_sub` and `species_sub` DataFrames. In other words, if a row in
-`survey_sub` has a value of `species_id` that does *not* appear in the `species_id`
-column of `species`, it will not be included in the DataFrame returned by an
-inner join.  Similarly, if a row in `species_sub` has a value of `species_id`
-that does *not* appear in the `species_id` column of `survey_sub`, that row will not
+The result of an inner join of `position_cols` and `time_cols` is a new DataFrame
+that contains the combined set of columns from `position_cols` and `time_cols`. It
+*only* contains rows that have record IDs that are the same in
+both` DataFrames. In other words, if a row in
+`position_cols` has a value of `record_id` that does *not* appear in the `record_id`
+column of `time_cols`, it will not be included in the DataFrame returned by an
+inner join.  Similarly, if a row in `time_cols` has a value of `record_id`
+that does *not* appear in the `record_id` column of `position_cols`, that row will not
 be included in the DataFrame returned by an inner join.
 
 The two DataFrames that we want to join are passed to the `merge` function using
 the `left` and `right` argument. The `left_on='species'` argument tells `merge`
-to use the `species_id` column as the join key from `survey_sub` (the `left`
-DataFrame). Similarly , the `right_on='species_id'` argument tells `merge` to
-use the `species_id` column as the join key from `species_sub` (the `right`
+to use the `record_id` column as the join key from `position_cols` (the `left`
+DataFrame). Similarly , the `right_on='record_id'` argument tells `merge` to
+use the `record_id` column as the join key from `position_cols` (the `right`
 DataFrame). For inner joins, the order of the `left` and `right` arguments does
 not matter.
 
-The result `merged_inner` DataFrame contains all of the columns from `survey_sub`
-(record id, month, day, etc.) as well as all the columns from `species_sub`
-(species_id, genus, species, and taxa).
-
-Notice that `merged_inner` has fewer rows than `survey_sub`. This is an
-indication that there were rows in `surveys_df` with value(s) for `species_id` that
-do not exist as value(s) for `species_id` in `species_df`.
+The result `merged_inner` DataFrame contains all of the columns from `position_cols`
+ as well as all the columns from `time_cols`.
 
 ## Left joins
-
-What if we want to add information from `species_sub` to `survey_sub` without
-losing any of the information from `survey_sub`? In this case, we use a different
-type of join called a "left outer join", or a "left join".
 
 Like an inner join, a left join uses join keys to combine two DataFrames. Unlike
 an inner join, a left join will return *all* of the rows from the `left`
@@ -334,63 +309,37 @@ A left join is performed in pandas by calling the same `merge` function used for
 inner join, but using the `how='left'` argument:
 
 ~~~
-merged_left = pd.merge(left=survey_sub, right=species_sub, how='left', left_on='species_id', right_on='species_id')
+merged_left = pd.merge(left=position_cols, right=time_cols, how='left', left_on='record_id', right_on='record_id')
 merged_left
 ~~~
 {: .language-python}
 ~~~
-   record_id  month  day  year  plot_id species_id sex  hindfoot_length  \
-0          1      7   16  1977        2         NL   M               32
-1          2      7   16  1977        3         NL   M               33
-2          3      7   16  1977        2         DM   F               37
-3          4      7   16  1977        7         DM   M               36
-4          5      7   16  1977        3         DM   M               35
-5          6      7   16  1977        1         PF   M               14
-6          7      7   16  1977        2         PE   F              NaN
-7          8      7   16  1977        1         DM   M               37
-8          9      7   16  1977        1         DM   F               34
-9         10      7   16  1977        6         PF   F               20
-
-   weight       genus   species    taxa
-0     NaN     Neotoma  albigula  Rodent
-1     NaN     Neotoma  albigula  Rodent
-2     NaN   Dipodomys  merriami  Rodent
-3     NaN   Dipodomys  merriami  Rodent
-4     NaN   Dipodomys  merriami  Rodent
-5     NaN         NaN       NaN     NaN
-6     NaN  Peromyscus  eremicus  Rodent
-7     NaN   Dipodomys  merriami  Rodent
-8     NaN   Dipodomys  merriami  Rodent
-9     NaN         NaN       NaN     NaN
+record_id  site  transect replicate  year  month        date
+0           1  IVEE         1         A  2012      8  2012-08-20
+1           2  IVEE         5         B  2012      8  2012-08-20
+2           3  IVEE         5         B  2012      8  2012-08-20
+3           4  IVEE         5         B  2012      8  2012-08-20
+4           5  IVEE         5         C  2012      8  2012-08-20
+5           6  IVEE         5         D  2012      8  2012-08-20
+6           7  IVEE         6         A  2012      8  2012-08-20
+7           8  IVEE         6         B  2012      8  2012-08-20
+8           9  IVEE         6         B  2012      8  2012-08-20
+9          10  IVEE         6         C  2012      8  2012-08-20
+10         11  IVEE         6         D  2012      8  2012-08-20
+...
+40         41  IVEE         4         D  2012      8  2012-08-20
+41         42  IVEE         4         B  2012      8  2012-08-20
+42         43  IVEE         4         C  2012      8  2012-08-20
+43         44  IVEE         3         D  2012      8  2012-08-20
+44         45  IVEE         3         C  2012      8  2012-08-20
+45         46  IVEE         3         C  2012      8  2012-08-20
+46         47  IVEE         3         C  2012      8  2012-08-20
+47         48  IVEE         4         A  2012      8  2012-08-20
+48         49  NAPL         6         D  2012      8  2012-08-22
+49         50  NAPL         8         A  2012      8  2012-08-22
+50         51  NAPL         7         A  2012      8  2012-08-22
 ~~~
 {: .output}
-
-The result DataFrame from a left join (`merged_left`) looks very much like the
-result DataFrame from an inner join (`merged_inner`) in terms of the columns it
-contains. However, unlike `merged_inner`, `merged_left` contains the **same
-number of rows** as the original `survey_sub` DataFrame. When we inspect
-`merged_left`, we find there are rows where the information that should have
-come from `species_sub` (i.e., `species_id`, `genus`, and `taxa`) is
-missing (they contain NaN values):
-
-~~~
-merged_left[ pd.isnull(merged_left.genus) ]
-~~~
-{: .language-python}
-~~~
-   record_id  month  day  year  plot_id species_id sex  hindfoot_length  \
-5          6      7   16  1977        1         PF   M               14
-9         10      7   16  1977        6         PF   F               20
-
-   weight genus species taxa
-5     NaN   NaN     NaN  NaN
-9     NaN   NaN     NaN  NaN
-~~~
-{: .output}
-
-These rows are the ones where the value of `species_id` from `survey_sub` (in this
-case, `PF`) does not occur in `species_sub`.
-
 
 ## Other join types
 
@@ -405,28 +354,34 @@ The pandas `merge` function supports two other join types:
   the result DataFrame will `NaN` where data is missing in one of the dataframes. This join type is
   very rarely used.
 
-# Final Challenges
+# Final Challenge
 
-> ## Challenge - Distributions
-> Create a new DataFrame by joining the contents of the `surveys.csv` and
-> `species.csv` tables. Then calculate and plot the distribution of:
+> ## Challenge - Merging Comparisons
+> Please implement left, right, and inner joins on dummy_df1 and dummy_df2. Try to answer the
+> questions below by observing the resulting three dataframes.
 >
-> 1. taxa by plot
-> 2. taxa by sex by plot
-{: .challenge}
-
-> ## Challenge - Diversity Index
+> ~~~
+> df_1 = {'site_rep': ['IVEE_A', 'NAPL_A', 'NAPL_B', 'AQUE_A', 'AQUE_B',
+>                     'AQUE_C', 'CARP_A', 'CARP_B', 'MOHK_A', 'MOHK_B'],
+>        'value': np.random.normal(0, 1, size= 10),
+>        'diver': ['foo', float("nan"), 'foo', 'baz', 'bar',
+>                  'baz', 'foo', float("nan"), 'baz', 'bar']}
 >
-> 1. In the data folder, there is a `plots.csv` file that contains information about the
->    type associated with each plot. Use that data to summarize the number of
->    plots by plot type.
-> 2. Calculate a diversity index of your choice for control vs rodent exclosure
->    plots. The index should consider both species abundance and number of
->    species. You might choose to use the simple [biodiversity index described
->    here](http://www.amnh.org/explore/curriculum-collections/biodiversity-counts/plant-ecology/how-to-calculate-a-biodiversity-index)
->    which calculates diversity as:
+> dummy_df1 = pd.DataFrame(df_1)
 >
->    the number of species in the plot / the total number of individuals in the plot = Biodiversity index.
+> df_2 = {'site_rep': ['IVEE_A', 'NAPL_A', 'NAPL_B', 'AQUE_A', 'AQUE_B',
+>                     float("nan"), 'CARP_A', 'CARP_B', 'MOHK_A', 'MOHK_B'],
+>        'transect': [1, 5, 6, 9, 7, 8, 4, 2, 3, float("nan")],
+>        'protected': [True, False, False, True, False,
+>                 True, True, True, False, False]}
+> dummy_df2 = pd.DataFrame(df_2)
+> ~~~
+> {: .language-python}
+>
+> 1. Are all the dataframes the same dimensions?
+> 2. What join do you think is best for these dataframes?
+> 3. Another parameter that is available with the merge function is sort (e.g. sort = True, sort
+> = False), what change do you observe 'sort = True' making?
 {: .challenge}
 
 [join-types]: http://blog.codinghorror.com/a-visual-explanation-of-sql-joins/
