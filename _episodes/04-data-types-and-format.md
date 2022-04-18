@@ -402,7 +402,7 @@ pandas doesn't include the index number for each line.
 
 ~~~
 # Write DataFrame to CSV
-df_na.to_csv('data_output/lobsters_complete.csv', index=False)
+df_na.to_csv('data/lobsters_complete.csv', index=False)
 ~~~
 {: .language-python}
 
