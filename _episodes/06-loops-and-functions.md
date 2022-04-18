@@ -105,7 +105,7 @@ the loop. The statement `pass` in the body of the loop means "do nothing".
 
 ## Automating data processing using For Loops
 
-The file we've been using so far, `surveys.csv`, contains 25 years of data and is
+The file we've been using so far, `lobsters_data.csv` is
 very large. We would like to separate the data for each year into a separate
 file.
 
