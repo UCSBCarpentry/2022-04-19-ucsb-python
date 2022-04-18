@@ -90,9 +90,9 @@ works.
 
 ~~~
 # Read in first 10 lines
-lobster_sub = lobster_df.head(10)
+lobster_sub = lobsters_df.head(10)
 # Grab the last 10 rows
-lobster_sub_last10 = lobster_df.tail(10)
+lobster_sub_last10 = lobsters_df.tail(10)
 # Reset the index values to the second dataframe appends properly
 lobster_sub_last10 = lobster_sub_last10.reset_index(drop=True)
 # drop=True option avoids adding new index column with old index values
