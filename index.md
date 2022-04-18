@@ -271,6 +271,8 @@ Edit the text to match who can attend the workshop. For instance:
 
 <hr/>
 
+{% include people.html %}
+
 {% comment%}
 CODE OF CONDUCT
 {% endcomment %}
