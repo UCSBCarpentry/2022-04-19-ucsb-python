@@ -496,7 +496,7 @@ Count per species site
 We can also look at how many lobsters were counted in each site:
 
 ~~~
-site_transect = lobsters_df.groupby('SITE')['record_id'].nunique()
+site_transect = lobsters_df.groupby('site')['record_id'].nunique()
 # Let's plot that too
 site_transect.plot(kind= 'bar');
 ~~~
