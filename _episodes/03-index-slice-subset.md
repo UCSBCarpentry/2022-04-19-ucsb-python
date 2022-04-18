@@ -1,7 +1,7 @@
 ---
 title: Indexing, Slicing and Subsetting DataFrames in Python
-teaching: 30
-exercises: 30
+teaching: 20
+exercises: 20
 questions:
     - "How can I access specific data within my data set?"
     - "How can Python and Pandas help me to analyse my data?"

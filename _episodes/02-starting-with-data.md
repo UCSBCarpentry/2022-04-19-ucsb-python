@@ -1,7 +1,7 @@
 ---
 title: Starting With Data
 teaching: 30
-exercises: 30
+exercises: 20
 questions:
     - "How can I import data in Python?"
     - "What is Pandas?"
@@ -173,7 +173,7 @@ or  `data`. We can create a new  object with a variable name by assigning a valu
 Let's call the imported lobster data `lobsters_df`:
 
 ~~~
-lobsters_df = pd.read_csv("data/lobster_abundance_size.csv")
+lobsters_df = pd.read_csv("data/lobsters_data.csv")
 ~~~
 {: .language-python}
 
